@@ -118,7 +118,6 @@ class Server:
         log(INFO, "Initializing global parameters")
         self.parameters = self._get_initial_parameters()
         log(INFO, "Evaluating initial parameters")
-        log(INFO, "initial parameters: %s", self.parameters)
         print("aaaaa")
 
 
