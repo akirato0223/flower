@@ -118,7 +118,6 @@ class Server:
         log(INFO, "Initializing global parameters")
         self.parameters = self._get_initial_parameters()
         log(INFO, "Evaluating initial parameters")
-        print(self.parameters)
         log(INFO, "initial parameters: %s", self.parameters)
         print("aaaaa")
 
@@ -259,7 +258,6 @@ class Server:
             rnd=rnd, parameters=self.parameters, client_manager=self._client_manager
         )
         log(INFO, "client_instructions: %s", client_instructions)
-        print(client_instructions)
         print("aaaaa")
 
         if not client_instructions:
