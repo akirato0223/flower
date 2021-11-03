@@ -36,10 +36,10 @@ classifiers = [
     "Typing :: Typed",
 ]
 packages = [
-    { include = "flwr", from = "./flwr" },
+    { include = "flwr", from = "./src" },
 ]
 exclude = [
-    "./flwr/**/*_test.py",
+    ".src/flwr/**/*_test.py",
 ]
 
 [tool.poetry.dependencies]
