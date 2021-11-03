@@ -136,14 +136,12 @@ class Server:
 
         # Run federated learning for num_rounds
         log(INFO, "FL starting")
-        log(INFO, "Aaaaaaa")
-        print("aaaaa")
+        print("bbbb")
         start_time = timeit.default_timer()
 
         for current_round in range(1, num_rounds + 1):
             # Train model and replace previous global model
             res_fit = self.fit_round(rnd=current_round)
-            log(INFO, "res_fit", res_fit)
             if res_fit:
                 parameters_prime, _, _ = res_fit  # fit_metrics_aggregated
                 if parameters_prime:
@@ -166,8 +164,7 @@ class Server:
 
             # Evaluate model on a sample of available clients
             res_fed = self.evaluate_round(rnd=current_round)
-            log(INFO, "res_fed", res_fed)
-            print("aaaaa")
+            print("cccc")
             if res_fed:
                 loss_fed, evaluate_metrics_fed, _ = res_fed
                 if loss_fed:
@@ -177,7 +174,7 @@ class Server:
                     )
 
         # Bookkeeping
-        print("aaaaa")
+        print("dddd")
         end_time = timeit.default_timer()
         elapsed = end_time - start_time
         log(INFO, "FL finished in %s", elapsed)
@@ -218,7 +215,7 @@ class Server:
 
         # Collect `evaluate` results from all clients participating in this round
         results, failures = evaluate_clients(client_instructions)
-        print("aaaaa")
+        print("eeee")
         log(
             DEBUG,
             "evaluate_round received %s results and %s failures",
@@ -257,8 +254,7 @@ class Server:
         client_instructions = self.strategy.configure_fit(
             rnd=rnd, parameters=self.parameters, client_manager=self._client_manager
         )
-        log(INFO, "client_instructions: %s", client_instructions)
-        print("aaaaa")
+        print("ffff")
 
         if not client_instructions:
             log(INFO, "fit_round: no clients selected, cancel")
