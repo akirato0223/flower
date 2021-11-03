@@ -65,4 +65,3 @@ class DefaultStrategy(FedAvg):
         DefaultStrategy will be removed in a future release. Migrate to FedAvg
         (which is functionally equivalent).
         """
-        print(warning)

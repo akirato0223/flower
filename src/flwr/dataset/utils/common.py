@@ -182,7 +182,6 @@ def log_distribution(xy_partitions: XYList) -> None:
     """Print label distribution for list of paritions."""
     distro = [np.unique(y, return_counts=True) for _, y in xy_partitions]
     for d in distro:
-        print(d)
 
 
 def adjust_xy_shape(xy: XY) -> XY:
