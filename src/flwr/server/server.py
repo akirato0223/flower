@@ -118,9 +118,6 @@ class Server:
         log(INFO, "Initializing global parameters")
         self.parameters = self._get_initial_parameters()
         log(INFO, "Evaluating initial parameters")
-        print("aaaaa")
-
-
 
         res = self.strategy.evaluate(parameters=self.parameters)
         if res is not None:
@@ -135,7 +132,7 @@ class Server:
 
         # Run federated learning for num_rounds
         log(INFO, "FL starting")
-        print("bakaaaaaaa")
+        print("all the clients: ", self.client_manager().all())
         start_time = timeit.default_timer()
 
         for current_round in range(1, num_rounds + 1):

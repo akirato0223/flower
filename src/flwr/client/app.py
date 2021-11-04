@@ -149,7 +149,6 @@ def start_keras_client(
     NumPyClient (recommended) or Client. NumPyClient is recommended because it
     is conceptually very similar to KerasClient.
     """
-    print(warning)
 
     # Wrap the Keras client
     flower_client = KerasClientWrapper(client)

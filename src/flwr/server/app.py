@@ -80,6 +80,7 @@ def start_server(  # pylint: disable=too-many-arguments
         initialized_config["num_rounds"],
     )
 
+    # after all the training ends
     _fl(
         server=initialized_server,
         config=initialized_config,
