@@ -310,6 +310,7 @@ class Server:
         # Get initial parameters from one of the clients
         log(INFO, "Requesting initial parameters from one random client")
         random_client = self._client_manager.sample(1)[0]
+        print("random_client", random_client)
         parameters_res = random_client.get_parameters()
         log(INFO, "Received initial parameters from one random client")
         return parameters_res.parameters

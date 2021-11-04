@@ -135,4 +135,5 @@ class SimpleClientManager(ClientManager):
                 cid for cid in available_cids if criterion.select(self.clients[cid])
             ]
         sampled_cids = random.sample(available_cids, num_clients)
+        print("sampled_cids:", sampled_cids)
         return [self.clients[cid] for cid in sampled_cids]
