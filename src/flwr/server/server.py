@@ -249,6 +249,7 @@ class Server:
         """Perform a single round of federated averaging."""
 
         # Get clients and their respective instructions from strategy
+        #client_instructions are gibbrish
         client_instructions = self.strategy.configure_fit(
             rnd=rnd, parameters=self.parameters, client_manager=self._client_manager
         )
@@ -265,7 +266,6 @@ class Server:
         )
 
         # Collect `fit` results from all clients participating in this round
-        print(client_instructions)
         results, failures = fit_clients(client_instructions)
         log(
             DEBUG,
