@@ -112,6 +112,7 @@ class Server:
     # pylint: disable=too-many-locals
     def fit(self, num_rounds: int) -> History:
         """Run federated averaging for a number of rounds."""
+        #num_rounds is argument that we pass (global model rounds)
         history = History()
 
         # Initialize parameters
@@ -119,6 +120,7 @@ class Server:
         self.parameters = self._get_initial_parameters()
         log(INFO, "Evaluating initial parameters")
 
+        
         res = self.strategy.evaluate(parameters=self.parameters)
         if res is not None:
             log(
@@ -160,7 +162,7 @@ class Server:
 
             # Evaluate model on a sample of available clients
             res_fed = self.evaluate_round(rnd=current_round)
-            print("cccc")
+            print("evaluate global model")
             if res_fed:
                 loss_fed, evaluate_metrics_fed, _ = res_fed
                 if loss_fed:
@@ -170,7 +172,7 @@ class Server:
                     )
 
         # Bookkeeping
-        print("dddd")
+        print("done with all the global training round")
         end_time = timeit.default_timer()
         elapsed = end_time - start_time
         log(INFO, "FL finished in %s", elapsed)
@@ -250,7 +252,7 @@ class Server:
         client_instructions = self.strategy.configure_fit(
             rnd=rnd, parameters=self.parameters, client_manager=self._client_manager
         )
-        print("ffff")
+        print("fit_round for global model")
 
         if not client_instructions:
             log(INFO, "fit_round: no clients selected, cancel")
@@ -263,6 +265,7 @@ class Server:
         )
 
         # Collect `fit` results from all clients participating in this round
+        print(client_instructions)
         results, failures = fit_clients(client_instructions)
         log(
             DEBUG,

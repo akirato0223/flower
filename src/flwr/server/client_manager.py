@@ -130,10 +130,11 @@ class SimpleClientManager(ClientManager):
         self.wait_for(min_num_clients)
         # Sample clients which meet the criterion
         available_cids = list(self.clients)
+        print("available cids:", available_cids)
         if criterion is not None:
             available_cids = [
                 cid for cid in available_cids if criterion.select(self.clients[cid])
             ]
         sampled_cids = random.sample(available_cids, num_clients)
-        print("sampled_cids:", sampled_cids)
+        print("sampled_cids:", [self.clients[cid] for cid in sampled_cids])
         return [self.clients[cid] for cid in sampled_cids]
