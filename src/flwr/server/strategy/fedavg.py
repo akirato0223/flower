@@ -211,9 +211,8 @@ class FedAvg(Strategy):
         if self.on_fit_config_fn is not None:
             # Custom fit config function provided
             config = self.on_fit_config_fn(rnd)
-        print("before FitIns")
         fit_ins = FitIns(parameters, config)
-        print("after FitIns")
+        print("Getting fitting instructions (global model parameters) for clients")
         # Sample clients
         sample_size, min_num_clients = self.num_fit_clients(
             client_manager.num_available()
