@@ -372,7 +372,7 @@ def fit_clients(
             # Success case
             result = future.result()
             results.append(result)
-            print(f"results after gathering each client: {results}")
+            print("gather results from each client")
     return results, failures
 
 
