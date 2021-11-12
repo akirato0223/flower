@@ -75,5 +75,6 @@ def start_insecure_grpc_server(
 
     server.add_insecure_port(server_address)
     server.start()
+    print("start insecure grpc server")
 
     return server

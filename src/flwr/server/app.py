@@ -69,6 +69,7 @@ def start_server(  # pylint: disable=too-many-arguments
     initialized_server, initialized_config = _init_defaults(server, config, strategy)
 
     # Start gRPC server
+    print("start gRPC server")
     grpc_server = start_insecure_grpc_server(
         client_manager=initialized_server.client_manager(),
         server_address=server_address,
@@ -81,12 +82,13 @@ def start_server(  # pylint: disable=too-many-arguments
     )
 
     # after all the training ends
+    print("all the training ended")
     _fl(
         server=initialized_server,
         config=initialized_config,
         force_final_distributed_eval=force_final_distributed_eval,
     )
-
+    print("stop the grpc server")
     # Stop the gRPC server
     grpc_server.stop(grace=1)
 

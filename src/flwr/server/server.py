@@ -122,7 +122,7 @@ class Server:
 
         
         res = self.strategy.evaluate(parameters=self.parameters)
-        print(f"initial parameters: {res}")
+        # print(f"initial parameters: {res}")
         if res is not None:
             log(
                 INFO,
@@ -254,7 +254,7 @@ class Server:
         client_instructions = self.strategy.configure_fit(
             rnd=rnd, parameters=self.parameters, client_manager=self._client_manager
         )
-        print("fit_round for global model")
+        print("perform a single round of federated averaging (fit_round function for global model)")
 
         if not client_instructions:
             log(INFO, "fit_round: no clients selected, cancel")
