@@ -5,7 +5,7 @@ requires = [
 build-backend = "poetry.masonry.api"
 
 [tool.poetry]
-name = "flwr"
+name = "flower"
 version = "0.1.0"
 description = "Flower for Independent Study"
 license = "Apache-2.0"
@@ -95,7 +95,7 @@ multi_line_output = 3
 include_trailing_comma = true
 force_grid_wrap = 0
 use_parentheses = true
-known_first_party = ["flwr"]
+known_first_party = ["flower"]
 
 [tool.black]
 line-length = 88
