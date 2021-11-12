@@ -189,7 +189,24 @@ class FedAvg(Strategy):
     def configure_fit(
         self, rnd: int, parameters: Parameters, client_manager: ClientManager
     ) -> List[Tuple[ClientProxy, FitIns]]:
-        """Configure the next round of training."""
+        """Configure the next round of training.   
+        Parameters
+        ----------
+        rnd : int
+            The current round of federated learning.
+        parameters : Parameters
+            The current (global) model parameters.
+        client_manager : ClientManager
+            The client manager which holds all currently connected clients.
+
+        Returns
+        -------
+        A list of tuples. Each tuple in the list identifies a `ClientProxy` and the
+        `FitIns` for this particular `ClientProxy`. If a particular `ClientProxy`
+        is not included in this list, it means that this `ClientProxy`
+        will not participate in the next round of federated learning.
+        FitIns:The training instructions containing (global) model parameters received from the server and a dictionary of configuration values used to customize the local training process.
+        """  
         config = {}
         if self.on_fit_config_fn is not None:
             # Custom fit config function provided
@@ -201,12 +218,12 @@ class FedAvg(Strategy):
         sample_size, min_num_clients = self.num_fit_clients(
             client_manager.num_available()
         )
-        print("sample clients")
+        print("sample clients inside fedavg")
         clients = client_manager.sample(
             num_clients=sample_size, min_num_clients=min_num_clients
         )
 
-        # Return client/config pairs
+        # Return client/training instruction(same global model parameters) pairs
         return [(client, fit_ins) for client in clients]
 
     def configure_evaluate(

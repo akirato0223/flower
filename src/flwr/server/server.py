@@ -214,7 +214,6 @@ class Server:
 
         # Collect `evaluate` results from all clients participating in this round
         results, failures = evaluate_clients(client_instructions)
-        print("eeee")
         log(
             DEBUG,
             "evaluate_round received %s results and %s failures",
@@ -251,22 +250,26 @@ class Server:
 
         # Get clients and their respective instructions from strategy
         #client_instructions are gibbrish
+        #configure_fit does the following.
+        #1, sample clients
+        #2, 
         client_instructions = self.strategy.configure_fit(
             rnd=rnd, parameters=self.parameters, client_manager=self._client_manager
         )
-        print("perform a single round of federated averaging (fit_round function for global model)")
+        # print("perform a single round of federated averaging (fit_round function for global model)")
 
         if not client_instructions:
             log(INFO, "fit_round: no clients selected, cancel")
             return None
         log(
             DEBUG,
-            "fit_round: strategy sampled %s clients (out of %s)",
+            "fit_round: FedAvg sampled %s clients (out of %s)",
             len(client_instructions),
             self._client_manager.num_available(),
         )
 
-        # Collect `fit` results from all clients participating in this round
+        # Collect `fit` results from all clients participating in this round (local training)
+        print("Collect `fit` results from all clients participating in this round (local training)")
         results, failures = fit_clients(client_instructions)
         log(
             DEBUG,
@@ -373,7 +376,9 @@ def fit_clients(
 
 def fit_client(client: ClientProxy, ins: FitIns) -> Tuple[ClientProxy, FitRes]:
     """Refine parameters on a single client."""
+    print("fitting client")
     fit_res = client.fit(ins)
+    print(f"the result of fitting client is {fit_res}")
     return client, fit_res
 
 
