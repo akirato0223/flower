@@ -269,8 +269,9 @@ class Server:
         )
 
         # Collect `fit` results from all clients participating in this round (local training)
-        print("Collect `fit` results from all clients participating in this round (local training)")
+
         results, failures = fit_clients(client_instructions)
+        print("Collect `fit` results from all clients participating in this round (local training)")
         log(
             DEBUG,
             "fit_round received %s results and %s failures",
@@ -371,14 +372,16 @@ def fit_clients(
             # Success case
             result = future.result()
             results.append(result)
+            print(f"results after gathering each client: {results}")
     return results, failures
 
 
 def fit_client(client: ClientProxy, ins: FitIns) -> Tuple[ClientProxy, FitRes]:
     """Refine parameters on a single client."""
-    print("fitting client")
+    print(f"fitting client: {client}")
     fit_res = client.fit(ins)
-    print(f"the result of fitting client is {fit_res}")
+    print(f"done with fitting client: {client}")
+    #fit_res is gibbrish
     return client, fit_res
 
 
