@@ -122,6 +122,7 @@ class Server:
 
         
         res = self.strategy.evaluate(parameters=self.parameters)
+        print(f"initial parameters: {res}")
         if res is not None:
             log(
                 INFO,
@@ -311,7 +312,7 @@ class Server:
             return parameters
 
         # Get initial parameters from one of the clients
-        log(INFO, "Requesting initial parameters from one random client")
+        log(INFO, "Requesting initial parameters from one random client among all the available clients, waiting... ")
         random_client = self._client_manager.sample(1)[0]
         print("random_client", random_client)
         parameters_res = random_client.get_parameters()
