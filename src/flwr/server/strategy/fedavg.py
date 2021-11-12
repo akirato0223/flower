@@ -221,6 +221,7 @@ class FedAvg(Strategy):
         clients = client_manager.sample(
             num_clients=sample_size, min_num_clients=min_num_clients
         )
+        print("sample clients done")
 
         # Return client/training instruction(same global model parameters) pairs
         return [(client, fit_ins) for client in clients]
