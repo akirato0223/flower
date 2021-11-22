@@ -162,8 +162,8 @@ class Server:
                 history.add_metrics_centralized(rnd=current_round, metrics=metrics_cen)
 
             # Evaluate model on a sample of available clients
+            print("evaluate model on a sample of available clients")
             res_fed = self.evaluate_round(rnd=current_round)
-            print("evaluate global model")
             if res_fed:
                 loss_fed, evaluate_metrics_fed, _ = res_fed
                 if loss_fed:
