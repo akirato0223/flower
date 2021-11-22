@@ -20,6 +20,7 @@ from queue import Queue
 from typing import Callable, Iterator, Tuple
 
 import grpc
+import os
 
 from flwr.common import GRPC_MAX_MESSAGE_LENGTH
 from flwr.common.logger import log
