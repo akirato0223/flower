@@ -56,7 +56,10 @@ def start_insecure_grpc_server(
         concurrent.futures.ThreadPoolExecutor(max_workers=max_concurrent_workers),
         # Set the maximum number of concurrent RPCs this server will service before
         # returning RESOURCE_EXHAUSTED status, or None to indicate no limit.
-        maximum_concurrent_rpcs=max_concurrent_workers,
+
+
+        # maximum_concurrent_rpcs=max_concurrent_workers,
+        maximum_concurrent_rpcs = None,
         options=[
             # Maximum number of concurrent incoming streams to allow on a http2
             # connection. Int valued.
@@ -69,12 +72,12 @@ def start_insecure_grpc_server(
             ("grpc.max_receive_message_length", max_message_length),
         ],
     )
-
+    
+    # add clients to client_manager 
     servicer = fss.FlowerServiceServicer(client_manager)
     transport_pb2_grpc.add_FlowerServiceServicer_to_server(servicer, server)
 
     server.add_insecure_port(server_address)
     server.start()
-    print("start insecure grpc server")
 
     return server

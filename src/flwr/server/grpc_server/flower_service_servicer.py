@@ -45,6 +45,7 @@ def register_client(
 ) -> bool:
     """Try registering GrpcClientProxy with ClientManager."""
     is_success = client_manager.register(client)
+    print("registered a client into client_manager")
 
     if is_success:
 
@@ -106,4 +107,5 @@ class FlowerServiceServicer(transport_pb2_grpc.FlowerServiceServicer):
                     client_message = next(client_message_iterator)
                     bridge.set_client_message(client_message)
                 except StopIteration:
+                    print("STOP ITERATION")
                     break

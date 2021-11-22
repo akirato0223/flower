@@ -81,8 +81,6 @@ def start_server(  # pylint: disable=too-many-arguments
         initialized_config["num_rounds"],
     )
 
-    # after all the training ends
-    print("all the training ended")
     _fl(
         server=initialized_server,
         config=initialized_config,
@@ -118,6 +116,7 @@ def _fl(
     server: Server, config: Dict[str, int], force_final_distributed_eval: bool
 ) -> None:
     # Fit model
+    print("server fitting a model")
     hist = server.fit(num_rounds=config["num_rounds"])
     log(INFO, "app_fit: losses_distributed %s", str(hist.losses_distributed))
     log(INFO, "app_fit: metrics_distributed %s", str(hist.metrics_distributed))

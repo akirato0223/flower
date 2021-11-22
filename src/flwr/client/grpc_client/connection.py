@@ -27,8 +27,8 @@ from flwr.proto.transport_pb2 import ClientMessage, ServerMessage
 from flwr.proto.transport_pb2_grpc import FlowerServiceStub
 
 # Uncomment these flags in case you are debugging
-# os.environ["GRPC_VERBOSITY"] = "debug"
-# os.environ["GRPC_TRACE"] = "connectivity_state"
+os.environ["GRPC_VERBOSITY"] = "debug"
+os.environ["GRPC_TRACE"] = "connectivity_state"
 
 
 def on_channel_state_change(channel_connectivity: str) -> None:
