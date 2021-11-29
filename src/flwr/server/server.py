@@ -270,7 +270,7 @@ class Server:
         # Collect `fit` results from all clients participating in this round (local training)
 
         results, failures = fit_clients(client_instructions)
-        print("Collect `fit` results from all clients participating in this round (local training)")
+
         log(
             DEBUG,
             "fit_round received %s results and %s failures",
@@ -279,6 +279,7 @@ class Server:
         )
 
         # Aggregate training results
+        print("aggregate local training results")
         aggregated_result: Union[
             Tuple[Optional[Parameters], Dict[str, Scalar]],
             Optional[Weights],  # Deprecated
@@ -371,16 +372,19 @@ def fit_clients(
             # Success case
             result = future.result()
             results.append(result)
-            print("gather results from each client")
+    print("Collect `fit` results from all clients participating in this round (local training)")
     return results, failures
 
 
 def fit_client(client: ClientProxy, ins: FitIns) -> Tuple[ClientProxy, FitRes]:
     """Refine parameters on a single client."""
     print(f"fitting client: {client}")
-    print(f"FitIns: {ins}")
+    # ins are not readable
+    # print(f"FitIns: {ins}")
     print("client.fit now")
-    fit_res = client.fit(ins)
+    #client fitting time
+    fit_res = client.fit(ins) 
+
     print(f"done with fitting client: {client}")
     #fit_res is not readable
     return client, fit_res
