@@ -379,6 +379,7 @@ def fit_client(client: ClientProxy, ins: FitIns) -> Tuple[ClientProxy, FitRes]:
     """Refine parameters on a single client."""
     print(f"fitting client: {client}")
     print(f"FitIns: {ins}")
+    print("client.fit now")
     fit_res = client.fit(ins)
     print(f"done with fitting client: {client}")
     #fit_res is not readable
