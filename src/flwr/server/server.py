@@ -138,6 +138,7 @@ class Server:
         print("all the clients: ", self.client_manager().all())
         start_time = timeit.default_timer()
 
+        # fit for the number of rounds that a user specifies. 
         for current_round in range(1, num_rounds + 1):
             # Train model and replace previous global model
             res_fit = self.fit_round(rnd=current_round)
@@ -250,9 +251,7 @@ class Server:
 
         # Get clients and their respective instructions from strategy
         #client_instructions are gibbrish
-        #configure_fit does the following.
-        #1, sample clients
-        #2, 
+
         client_instructions = self.strategy.configure_fit(
             rnd=rnd, parameters=self.parameters, client_manager=self._client_manager
         )
@@ -379,9 +378,10 @@ def fit_clients(
 def fit_client(client: ClientProxy, ins: FitIns) -> Tuple[ClientProxy, FitRes]:
     """Refine parameters on a single client."""
     print(f"fitting client: {client}")
+    print(f"FitIns: {ins}")
     fit_res = client.fit(ins)
     print(f"done with fitting client: {client}")
-    #fit_res is gibbrish
+    #fit_res is not readable
     return client, fit_res
 
 
