@@ -62,7 +62,7 @@ def start_client(
 
             while True:
                 server_message = receive()
-                log(INFO, server_message)
+                # log(INFO, server_message)
                 client_message, sleep_duration, keep_going = handle(
                     client, server_message
                 )
