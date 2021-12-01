@@ -373,7 +373,9 @@ def fit_clients(
             # Success case
             result = future.result()
             results.append(result)
-    print("Collect `fit` results from all clients participating in this round (local training)")
+
+    log(INFO, "Collect `fit` results from all clients participating in this round (local training)")
+    
     return results, failures
 
 
@@ -385,8 +387,7 @@ def fit_client(client: ClientProxy, ins: FitIns) -> Tuple[ClientProxy, FitRes]:
     log(INFO, "Client Fit")
     #client fitting time - This is done in each client function
     fit_res = client.fit(ins) 
-
-    print(f"done with fitting client: {client}")
+    log(INFO, f"Done with fitting client: {client}")
     #fit_res is not readable
     return client, fit_res
 
