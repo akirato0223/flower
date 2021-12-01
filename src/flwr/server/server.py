@@ -147,9 +147,11 @@ class Server:
                 # update global parameters on server
                 if parameters_prime:
                     self.parameters = parameters_prime
+                    log(INFO, "Update the global parameters")
 
             # Evaluate model using strategy implementation
             res_cen = self.strategy.evaluate(parameters=self.parameters)
+            log(INFO, "Evaluate the update global parameters")
             if res_cen is not None:
                 loss_cen, metrics_cen = res_cen
                 log(
@@ -164,7 +166,6 @@ class Server:
                 history.add_metrics_centralized(rnd=current_round, metrics=metrics_cen)
 
             # Evaluate model on a sample of available clients
-            print("evaluate model on a sample of available clients")
             res_fed = self.evaluate_round(rnd=current_round)
             if res_fed:
                 loss_fed, evaluate_metrics_fed, _ = res_fed
@@ -175,10 +176,9 @@ class Server:
                     )
 
         # Bookkeeping
-        print("done with all the global training round")
         end_time = timeit.default_timer()
         elapsed = end_time - start_time
-        log(INFO, "FL finished in %s", elapsed)
+        log(INFO, "FL / all the training rounds finished in %s", elapsed)
         return history
 
     def evaluate(
@@ -280,11 +280,11 @@ class Server:
         )
 
         # Aggregate training results
-        print("aggregate local training results")
         aggregated_result: Union[
             Tuple[Optional[Parameters], Dict[str, Scalar]],
             Optional[Weights],  # Deprecated
         ] = self.strategy.aggregate_fit(rnd, results, failures)
+        log(INFO, "Finished FedAvg on locally updated parameters.")
 
         metrics_aggregated: Dict[str, Scalar] = {}
         if aggregated_result is None:
@@ -375,7 +375,7 @@ def fit_clients(
             results.append(result)
 
     log(INFO, "Collect `fit` results from all clients participating in this round (local training)")
-    
+
     return results, failures
 
 

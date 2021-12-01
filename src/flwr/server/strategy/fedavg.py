@@ -18,7 +18,8 @@ Paper: https://arxiv.org/abs/1602.05629
 """
 
 
-from logging import WARNING
+from logging import WARNING, INFO
+
 from typing import Callable, Dict, List, Optional, Tuple
 
 from flwr.common import (
@@ -217,11 +218,10 @@ class FedAvg(Strategy):
         sample_size, min_num_clients = self.num_fit_clients(
             client_manager.num_available()
         )
-        print("sample clients inside fedavg")
         clients = client_manager.sample(
             num_clients=sample_size, min_num_clients=min_num_clients
         )
-        print("sample clients done")
+        log(INFO, "Finished sampling clients")
 
         # Return client/training instruction(same global model parameters) pairs
         return [(client, fit_ins) for client in clients]

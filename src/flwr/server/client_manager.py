@@ -22,7 +22,8 @@ from typing import Dict, List, Optional
 
 from .client_proxy import ClientProxy
 from .criterion import Criterion
-
+from logging import INFO
+from flwr.common.logger import log
 
 class ClientManager(ABC):
     """Abstract base class for managing Flower clients."""
@@ -130,11 +131,11 @@ class SimpleClientManager(ClientManager):
         self.wait_for(min_num_clients)
         # Sample clients which meet the criterion
         available_cids = list(self.clients)
-        print("available cids:", available_cids)
+        log(INFO, f"Available cids: {available_cids}")
         if criterion is not None:
             available_cids = [
                 cid for cid in available_cids if criterion.select(self.clients[cid])
             ]
         sampled_cids = random.sample(available_cids, num_clients)
-        print("sampled_cids:", [self.clients[cid] for cid in sampled_cids])
+        log(INFO, f"Sampled cids: {sampled_cids}")
         return [self.clients[cid] for cid in sampled_cids]
