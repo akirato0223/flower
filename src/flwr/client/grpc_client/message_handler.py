@@ -47,6 +47,7 @@ def handle(
 
 def _get_parameters(client: Client) -> ClientMessage:
     # No need to deserialize get_parameters_msg (it's empty)
+    print("_get_parameters function called")
     parameters_res = client.get_parameters()
     parameters_res_proto = serde.parameters_res_to_proto(parameters_res)
     return ClientMessage(parameters_res=parameters_res_proto)
@@ -56,6 +57,7 @@ def _get_properties(
     client: Client, properties_msg: ServerMessage.PropertiesIns
 ) -> ClientMessage:
     # Deserialize get_properties instruction
+    print("_get_properties function called")
     properties_ins = serde.properties_ins_from_proto(properties_msg)
     # Request for properties
     properties_res = client.get_properties(properties_ins)
@@ -76,6 +78,7 @@ def _fit(client: Client, fit_msg: ServerMessage.FitIns) -> ClientMessage:
 
 
 def _evaluate(client: Client, evaluate_msg: ServerMessage.EvaluateIns) -> ClientMessage:
+    print("_evaluate function called")
     # Deserialize evaluate instruction
     evaluate_ins = serde.evaluate_ins_from_proto(evaluate_msg)
     # Perform evaluation
