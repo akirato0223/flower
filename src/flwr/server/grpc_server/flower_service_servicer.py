@@ -18,6 +18,9 @@ Relevant knowledge for reading this modules code:
     - https://github.com/grpc/grpc/blob/master/doc/statuscodes.md
 """
 from typing import Callable, Iterator
+from logging import INFO
+
+from flwr.common.logger import log
 
 import grpc
 
@@ -45,10 +48,9 @@ def register_client(
 ) -> bool:
     """Try registering GrpcClientProxy with ClientManager."""
     is_success = client_manager.register(client)
-    print("registered a client into client_manager")
+    log(INFO, "Registered a client into client_manager")
 
     if is_success:
-
         def rpc_termination_callback() -> None:
             client.bridge.close()
             client_manager.unregister(client)

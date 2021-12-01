@@ -381,10 +381,9 @@ def fit_clients(
 
 def fit_client(client: ClientProxy, ins: FitIns) -> Tuple[ClientProxy, FitRes]:
     """Refine parameters on a single client."""
-    print(f"fitting client: {client}")
     # ins are not readable
     # print(f"FitIns: {ins}")
-    log(INFO, "Client Fit")
+    log(INFO, f"Client Fit for {client}")
     #client fitting time - This is done in each client function
     fit_res = client.fit(ins) 
     log(INFO, f"Done with fitting client: {client}")
