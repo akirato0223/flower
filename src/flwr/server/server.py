@@ -382,7 +382,7 @@ def fit_client(client: ClientProxy, ins: FitIns) -> Tuple[ClientProxy, FitRes]:
     print(f"fitting client: {client}")
     # ins are not readable
     # print(f"FitIns: {ins}")
-    print("client.fit now")
+    log(INFO, "Client Fit")
     #client fitting time - This is done in each client function
     fit_res = client.fit(ins) 
 

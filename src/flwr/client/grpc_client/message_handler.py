@@ -17,6 +17,8 @@
 
 from typing import Tuple
 
+from logging import INFO
+from flwr.common.logger import log
 from flwr.client.client import Client
 from flwr.common import serde
 from flwr.proto.transport_pb2 import ClientMessage, Reason, ServerMessage
@@ -47,6 +49,7 @@ def handle(
 
 def _get_parameters(client: Client) -> ClientMessage:
     # No need to deserialize get_parameters_msg (it's empty)
+    #never called
     print("_get_parameters function called")
     parameters_res = client.get_parameters()
     parameters_res_proto = serde.parameters_res_to_proto(parameters_res)
@@ -57,6 +60,7 @@ def _get_properties(
     client: Client, properties_msg: ServerMessage.PropertiesIns
 ) -> ClientMessage:
     # Deserialize get_properties instruction
+    #never called
     print("_get_properties function called")
     properties_ins = serde.properties_ins_from_proto(properties_msg)
     # Request for properties
@@ -70,7 +74,8 @@ def _fit(client: Client, fit_msg: ServerMessage.FitIns) -> ClientMessage:
     # Deserialize fit instruction
     fit_ins = serde.fit_ins_from_proto(fit_msg)
     # Perform fit
-    print("perform fit in client??????")
+    # print("perform fit_in in client because server sent client a message")
+    log(INFO, "Perform fit_in client because server sent client a message")
     fit_res = client.fit(fit_ins)
     # Serialize fit result
     fit_res_proto = serde.fit_res_to_proto(fit_res)
