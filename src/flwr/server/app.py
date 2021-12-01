@@ -69,7 +69,6 @@ def start_server(  # pylint: disable=too-many-arguments
     initialized_server, initialized_config = _init_defaults(server, config, strategy)
 
     # Start gRPC server
-    print("start gRPC server")
     grpc_server = start_insecure_grpc_server(
         client_manager=initialized_server.client_manager(),
         server_address=server_address,
