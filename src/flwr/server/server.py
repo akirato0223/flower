@@ -144,6 +144,7 @@ class Server:
             res_fit = self.fit_round(rnd=current_round)
             if res_fit:
                 parameters_prime, _, _ = res_fit  # fit_metrics_aggregated
+                # update global parameters on server
                 if parameters_prime:
                     self.parameters = parameters_prime
 
@@ -382,7 +383,7 @@ def fit_client(client: ClientProxy, ins: FitIns) -> Tuple[ClientProxy, FitRes]:
     # ins are not readable
     # print(f"FitIns: {ins}")
     print("client.fit now")
-    #client fitting time
+    #client fitting time - This is done in each client function
     fit_res = client.fit(ins) 
 
     print(f"done with fitting client: {client}")

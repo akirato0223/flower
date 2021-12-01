@@ -68,6 +68,7 @@ def _fit(client: Client, fit_msg: ServerMessage.FitIns) -> ClientMessage:
     # Deserialize fit instruction
     fit_ins = serde.fit_ins_from_proto(fit_msg)
     # Perform fit
+    print("perform fit in client??????")
     fit_res = client.fit(fit_ins)
     # Serialize fit result
     fit_res_proto = serde.fit_res_to_proto(fit_res)
